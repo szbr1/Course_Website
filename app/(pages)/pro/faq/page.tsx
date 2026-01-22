@@ -20,7 +20,7 @@ function Faq() {
 
       <div className="flex flex-col gap-4 md:gap-6 w-full">
         {FAQ_DATA.map((f, i) => {
-            let id = i === hasAnyQuestion
+            const id = i === hasAnyQuestion
          return <div
             className="rounded-md select-none  bg-white relative z-40 border-2 border-blue flex flex-col gap-2 shadow-[6px_6px_0px_#334456] transition-all duration-300 px-2 p-3 md:px-3 lg:px-4"
             key={i}

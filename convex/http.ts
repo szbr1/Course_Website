@@ -1,4 +1,5 @@
 import { WebhookEvent } from "@clerk/nextjs/server";
+import {stripe} from "../lib/stripe"
 import { httpAction } from "./_generated/server";
 import {httpRouter} from "convex/server"
 import {Webhook} from "svix"
@@ -46,15 +47,26 @@ const ClerkWebHook =  httpAction(async (ctx,request)=>{
         const email = evt.data.email_addresses[0].email_address;
         const imageUrl = evt.data.image_url
         const clerkId = evt.data.id
+    try {
+        const customer = await stripe.customers.create({
+            name,
+            email,
+            metadata: {clerkId}
+        })
 
         await ctx.runMutation(api.users.createUser,{
             name,
             email,
             imageUrl,
-            clerkUserId: clerkId
+            clerkUserId: clerkId,
+            stripeCustomerId: customer.id
         } )
+    } catch (error) {
+        console.error(error)
+        new Response("Server error")
     }
-
+        
+    }
       return new Response("successfully user created", {status:200})
 
 })

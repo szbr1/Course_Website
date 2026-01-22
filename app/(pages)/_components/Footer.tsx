@@ -20,16 +20,18 @@ function Footer() {
         ))}
 
         <div className='flex flex-col gap-3 md:gap-6'>
-           <h1 className='font-bold font-nunito sm:text-sm md:text-lg md:text-xl lg:text-2xl'>{FOOTER_DATA.appDownload.title}</h1>
-           <WebButton variant='outline' className='flex justify-start gap-8 items-center rounded-md h-12 px-0 w-50'> 
-             <IoLogoGooglePlaystore className='size-8' />
+           <h1 className='font-bold font-nunito sm:text-sm md:text-lg  lg:text-2xl'>{FOOTER_DATA.appDownload.title}</h1>
+           <button  className='flex justify-center gap-2 border-2 items-center rounded-md h-12 px-0 bg-white'> 
+             <div className='flex items-center gap-2 '>
+              <IoLogoGooglePlaystore className='size-9' />
              <div className='flex flex-col '>
                <p className='font-nunito font-light text-xs md:text-sm'>
                 GET IT ON
                </p>
                <h1 className=' font-nunito text-sm'>Google Play</h1>
              </div>
-           </WebButton>
+             </div>
+           </button>
         </div>
       
     </footer>

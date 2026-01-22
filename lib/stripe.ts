@@ -1,5 +1,11 @@
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET!,{
-    apiVersion: "2025-12-15.clover"
-})
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+
+if (!stripeKey) {
+  throw new Error("STRIPE_SECRET_KEY is not set");
+}
+
+export const stripe = new Stripe(stripeKey, {
+  apiVersion: "2025-12-15.clover",
+});

@@ -41,18 +41,18 @@ function Contact() {
             console.log(actualData)
         }
   return (
-    <div className="max-w-[900px] mx-auto flex flex-col gap-12 justify-center md:mb-20 py-12 font-nunito p-3">
+    <div className="max-w-[900px] mx-auto flex flex-col gap-12 justify-center md:mb-20 py-12 font-nunito p-3 ">
       <div className="flex flex-col gap-4 font-nunito md:gap-6">
-        <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl text-center lg:text-2xl">
-          Contact us
-        </h1>
-        <p className="text-xs md:text-sm text-center">
+        <h1 className="text-4xl text-center sm:text-5xl font-extrabold tracking-tight font-nunito text-blue">
+            Contact us
+          </h1>
+        <p className="text-xs md:text-base max-w-[600px] mx-auto text-center opacity-80">
           {" "}
           Have a project in mind or need technical assistance with your web application? Reach out and let’s discuss the details.
         </p>
       </div>
 
-      <div className="w-full rounded-lg border-2 border-blue shadow-[6px_6px_0px_#334456] p-3 md:p-6 lg:p-9">
+      <div className="w-full rounded-lg border-2 border-blue shadow-[6px_6px_0px_#334456] p-3 md:p-6 lg:p-9 relative z-20 bg-white">
         <form action={formAction} className="flex flex-col gap-3 md:gap-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col justify-start">
@@ -102,7 +102,7 @@ function Contact() {
         {CONTACT_CARDS.map((card, index) => (
           <div
             key={index}
-            className="border-2 p-2 border-blue shadow-[6px_6px_0px_#334456] rounded-md flex flex-col gap-3"
+            className="border-2 p-2 relative z-20 bg-white border-blue/40 px-4 shadow-[4px_4px_0px_#334456] rounded-md flex flex-col gap-3"
           >
             <h1 className=" font-bold">{card.title}</h1>
             <p className="text-xs font-light md:text-sm ">

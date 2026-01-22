@@ -1,4 +1,4 @@
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const createUser = mutation({
@@ -7,6 +7,7 @@ export const createUser = mutation({
     email: v.string(),
     name: v.string(),
     imageUrl: v.string(),
+    stripeCustomerId: v.string()
   },
   handler: async (ctx, args) => {
     // Check if user already exists
@@ -27,8 +28,46 @@ export const createUser = mutation({
       email: args.email,
       name: args.name,
       imageUrl: args.imageUrl,
+      stripeCustomerId: args.stripeCustomerId
     });
 
     return userId;
   },
 });
+
+export const getUserWithClerkId = query({
+  args: {
+    clerkId: v.string()
+  },
+  handler: async(ctx,args)=>{
+    const user = await ctx.db.query("users").withIndex("by_clerkId", q => q.eq("clerkId", args.clerkId)).unique();
+
+    if(!user) throw new Error ("Unathorized Clerk User");
+    return user
+  }
+})
+
+
+export const getUserWithStripeId = query({
+  args: {
+    stripeCustomerId: v.string()
+  },
+  handler: async(ctx,args)=>{
+    const user = await ctx.db.query("users").withIndex("by_stripeCustomerId", q => q.eq("stripeCustomerId", args.stripeCustomerId)).unique();
+
+    if(!user) throw new Error ("Unathorized Stripe Customer Id");
+    return user
+  }
+})
+
+export const getUserWithSubscriptionId = query({
+  args: {
+    subscriptionId: v.string()
+  },
+  handler: async(ctx,args)=>{
+    const user = await ctx.db.query("users").withIndex("by_subscriptionId", q => q.eq("subscriptionId", args.subscriptionId)).unique();
+
+    if(!user) throw new Error ("Unathorized Stripe Customer Id");
+    return user
+  }
+})
